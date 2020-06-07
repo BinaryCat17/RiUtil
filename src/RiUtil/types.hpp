@@ -814,4 +814,11 @@ namespace rise {
 
         size_t value = 0;
     };
+
+    struct MemData {
+        explicit MemData(const void *data, const Size &size) : data(data), size(size) {}
+
+        void const* data;
+        Size size;
+    };
 }
