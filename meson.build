@@ -6,7 +6,7 @@ project('RiUtil', 'cpp',
 
 includes = include_directories('src')
 
-lib = library('RiUtil',
+lib = static_library('RiUtil',
     'src/RiUtil/types.cpp',
     install : true,
     include_directories : includes)
