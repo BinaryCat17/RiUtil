@@ -414,7 +414,7 @@ namespace rise {
         Version() = default;
 
         explicit Version(unsigned int major, unsigned int minor = 0, unsigned int patch = 0,
-                unsigned int tweak = 0) : major(major), minor(minor), patch(patch), tweak(tweak) {}
+                         unsigned int tweak = 0) : major(major), minor(minor), patch(patch), tweak(tweak) {}
 
         bool operator==(Version const &rhs) const {
             return major == rhs.major &&
@@ -465,5 +465,266 @@ namespace rise {
         unsigned minor = 0;
         unsigned patch = 0;
         unsigned tweak = 0;
+    };
+
+    struct Size {
+        Size() = default;
+
+        explicit Size(size_t value) : value(value) {}
+
+        bool operator==(Size rhs) const {
+            return value == rhs.value;
+        }
+
+        bool operator!=(Size rhs) const {
+            return !(rhs == *this);
+        }
+
+        bool operator<(Size rhs) const {
+            return value < rhs.value;
+        }
+
+        bool operator>(Size rhs) const {
+            return rhs < *this;
+        }
+
+        bool operator<=(Size rhs) const {
+            return !(rhs < *this);
+        }
+
+        bool operator>=(Size rhs) const {
+            return !(*this < rhs);
+        }
+
+        Size& operator+=(Size rhs) {
+            value += rhs.value;
+            return *this;
+        }
+
+        friend Size operator+(Size lhs, Size rhs) {
+            lhs += rhs;
+            return lhs;
+        }
+
+        Size& operator-=(Size rhs) {
+            value -= rhs.value;
+            return *this;
+        }
+
+        friend Size operator-(Size lhs, Size rhs) {
+            lhs -= rhs;
+            return lhs;
+        }
+
+        Size& operator*=(Size rhs) {
+            value *= rhs.value;
+            return *this;
+        }
+
+        friend Size operator*(Size lhs, Size rhs) {
+            lhs *= rhs;
+            return lhs;
+        }
+
+        Size& operator/=(Size rhs) {
+            value /= rhs.value;
+            return *this;
+        }
+
+        friend Size operator/(Size lhs, Size rhs) {
+            lhs /= rhs;
+            return lhs;
+        }
+
+        Size& operator%=(Size rhs) {
+            value %= rhs.value;
+            return *this;
+        }
+
+        friend Size operator%(Size lhs, Size rhs) {
+            lhs %= rhs;
+            return lhs;
+        }
+
+        friend std::ostream &operator<<(std::ostream &os, Size const &val) {
+            os << val.value;
+            return os;
+        }
+
+        size_t value = 0;
+    };
+
+    struct Offset {
+        Offset() = default;
+
+        explicit Offset(size_t value) : value(value) {}
+
+        bool operator==(Offset rhs) const {
+            return value == rhs.value;
+        }
+
+        bool operator!=(Offset rhs) const {
+            return !(rhs == *this);
+        }
+
+        bool operator<(Offset rhs) const {
+            return value < rhs.value;
+        }
+
+        bool operator>(Offset rhs) const {
+            return rhs < *this;
+        }
+
+        bool operator<=(Offset rhs) const {
+            return !(rhs < *this);
+        }
+
+        bool operator>=(Offset rhs) const {
+            return !(*this < rhs);
+        }
+
+        Offset& operator+=(Offset rhs) {
+            value += rhs.value;
+            return *this;
+        }
+
+        friend Offset operator+(Offset lhs, Offset rhs) {
+            lhs += rhs;
+            return lhs;
+        }
+
+        Offset& operator-=(Offset rhs) {
+            value -= rhs.value;
+            return *this;
+        }
+
+        friend Offset operator-(Offset lhs, Offset rhs) {
+            lhs -= rhs;
+            return lhs;
+        }
+
+        Offset& operator*=(Offset rhs) {
+            value *= rhs.value;
+            return *this;
+        }
+
+        friend Offset operator*(Offset lhs, Offset rhs) {
+            lhs *= rhs;
+            return lhs;
+        }
+
+        Offset& operator/=(Offset rhs) {
+            value /= rhs.value;
+            return *this;
+        }
+
+        friend Offset operator/(Offset lhs, Offset rhs) {
+            lhs /= rhs;
+            return lhs;
+        }
+
+        Offset& operator%=(Offset rhs) {
+            value %= rhs.value;
+            return *this;
+        }
+
+        friend Offset operator%(Offset lhs, Offset rhs) {
+            lhs %= rhs;
+            return lhs;
+        }
+
+        friend std::ostream &operator<<(std::ostream &os, Offset const &val) {
+            os << val.value;
+            return os;
+        }
+
+        size_t value = 0;
+    };
+
+    struct Alignment {
+        Alignment() = default;
+
+        explicit Alignment(size_t value) : value(value) {}
+
+        bool operator==(Alignment rhs) const {
+            return value == rhs.value;
+        }
+
+        bool operator!=(Alignment rhs) const {
+            return !(rhs == *this);
+        }
+
+        bool operator<(Alignment rhs) const {
+            return value < rhs.value;
+        }
+
+        bool operator>(Alignment rhs) const {
+            return rhs < *this;
+        }
+
+        bool operator<=(Alignment rhs) const {
+            return !(rhs < *this);
+        }
+
+        bool operator>=(Alignment rhs) const {
+            return !(*this < rhs);
+        }
+
+        Alignment& operator+=(Alignment rhs) {
+            value += rhs.value;
+            return *this;
+        }
+
+        friend Alignment operator+(Alignment lhs, Alignment rhs) {
+            lhs += rhs;
+            return lhs;
+        }
+
+        Alignment& operator-=(Alignment rhs) {
+            value -= rhs.value;
+            return *this;
+        }
+
+        friend Alignment operator-(Alignment lhs, Alignment rhs) {
+            lhs -= rhs;
+            return lhs;
+        }
+
+        Alignment& operator*=(Alignment rhs) {
+            value *= rhs.value;
+            return *this;
+        }
+
+        friend Alignment operator*(Alignment lhs, Alignment rhs) {
+            lhs *= rhs;
+            return lhs;
+        }
+
+        Alignment& operator/=(Alignment rhs) {
+            value /= rhs.value;
+            return *this;
+        }
+
+        friend Alignment operator/(Alignment lhs, Alignment rhs) {
+            lhs /= rhs;
+            return lhs;
+        }
+
+        Alignment& operator%=(Alignment rhs) {
+            value %= rhs.value;
+            return *this;
+        }
+
+        friend Alignment operator%(Alignment lhs, Alignment rhs) {
+            lhs %= rhs;
+            return lhs;
+        }
+
+        friend std::ostream &operator<<(std::ostream &os, Alignment const &val) {
+            os << val.value;
+            return os;
+        }
+
+        size_t value = 0;
     };
 }
