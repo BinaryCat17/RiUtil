@@ -727,4 +727,91 @@ namespace rise {
 
         size_t value = 0;
     };
+
+    struct Index {
+        Index() = default;
+
+        explicit Index(size_t value) : value(value) {}
+
+        bool operator==(Index rhs) const {
+            return value == rhs.value;
+        }
+
+        bool operator!=(Index rhs) const {
+            return !(rhs == *this);
+        }
+
+        bool operator<(Index rhs) const {
+            return value < rhs.value;
+        }
+
+        bool operator>(Index rhs) const {
+            return rhs < *this;
+        }
+
+        bool operator<=(Index rhs) const {
+            return !(rhs < *this);
+        }
+
+        bool operator>=(Index rhs) const {
+            return !(*this < rhs);
+        }
+
+        Index& operator+=(Index rhs) {
+            value += rhs.value;
+            return *this;
+        }
+
+        friend Index operator+(Index lhs, Index rhs) {
+            lhs += rhs;
+            return lhs;
+        }
+
+        Index& operator-=(Index rhs) {
+            value -= rhs.value;
+            return *this;
+        }
+
+        friend Index operator-(Index lhs, Index rhs) {
+            lhs -= rhs;
+            return lhs;
+        }
+
+        Index& operator*=(Index rhs) {
+            value *= rhs.value;
+            return *this;
+        }
+
+        friend Index operator*(Index lhs, Index rhs) {
+            lhs *= rhs;
+            return lhs;
+        }
+
+        Index& operator/=(Index rhs) {
+            value /= rhs.value;
+            return *this;
+        }
+
+        friend Index operator/(Index lhs, Index rhs) {
+            lhs /= rhs;
+            return lhs;
+        }
+
+        Index& operator%=(Index rhs) {
+            value %= rhs.value;
+            return *this;
+        }
+
+        friend Index operator%(Index lhs, Index rhs) {
+            lhs %= rhs;
+            return lhs;
+        }
+
+        friend std::ostream &operator<<(std::ostream &os, Index const &val) {
+            os << val.value;
+            return os;
+        }
+
+        size_t value = 0;
+    };
 }
