@@ -6,9 +6,9 @@ project('RiUtil', 'cpp',
 
 includes = include_directories('src')
 
-lib = static_library('RiUtil',
+lib = library('RiUtil',
     'src/RiUtil/types.cpp',
     install : true,
     include_directories : includes)
 
-RiWindow_dep = declare_dependency(link_with : lib, include_directories : includes)
+RiUtil_dep = declare_dependency(link_with : lib, include_directories : includes)
