@@ -816,9 +816,9 @@ namespace rise {
     };
 
     struct MemData {
-        explicit MemData(const void *data, const Size &size) : data(data), size(size) {}
+        explicit MemData(const *data, const Size &size) : data(data), size(size) {}
 
-        void const* data;
+        void* data;
         Size size;
     };
 }
