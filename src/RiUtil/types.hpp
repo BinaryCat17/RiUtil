@@ -2,7 +2,7 @@
 
 #include <ostream>
 
-namespace orfey {
+namespace rise {
     struct Width {
         Width() = default;
 
