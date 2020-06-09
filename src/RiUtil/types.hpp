@@ -821,7 +821,7 @@ namespace rise {
         explicit MemData(void *data, const Size &size) : data(data), size(size) {}
 
         template<typename T>
-        explicit MemData(std::vector<T> const &vec) :
+        explicit MemData(std::vector<T> &vec) :
                 data(vec.data()), size(vec.size() * sizeof(T)) {}
 
         void *data;
