@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ostream>
+#include <vector>
 
 namespace rise {
     struct Width {
@@ -414,7 +415,8 @@ namespace rise {
         Version() = default;
 
         explicit Version(unsigned int major, unsigned int minor = 0, unsigned int patch = 0,
-                         unsigned int tweak = 0) : major(major), minor(minor), patch(patch), tweak(tweak) {}
+                         unsigned int tweak = 0) : major(major), minor(minor), patch(patch),
+                                                   tweak(tweak) {}
 
         bool operator==(Version const &rhs) const {
             return major == rhs.major &&
@@ -496,7 +498,7 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        Size& operator+=(Size rhs) {
+        Size &operator+=(Size rhs) {
             value += rhs.value;
             return *this;
         }
@@ -506,7 +508,7 @@ namespace rise {
             return lhs;
         }
 
-        Size& operator-=(Size rhs) {
+        Size &operator-=(Size rhs) {
             value -= rhs.value;
             return *this;
         }
@@ -516,7 +518,7 @@ namespace rise {
             return lhs;
         }
 
-        Size& operator*=(Size rhs) {
+        Size &operator*=(Size rhs) {
             value *= rhs.value;
             return *this;
         }
@@ -526,7 +528,7 @@ namespace rise {
             return lhs;
         }
 
-        Size& operator/=(Size rhs) {
+        Size &operator/=(Size rhs) {
             value /= rhs.value;
             return *this;
         }
@@ -536,7 +538,7 @@ namespace rise {
             return lhs;
         }
 
-        Size& operator%=(Size rhs) {
+        Size &operator%=(Size rhs) {
             value %= rhs.value;
             return *this;
         }
@@ -583,7 +585,7 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        Offset& operator+=(Offset rhs) {
+        Offset &operator+=(Offset rhs) {
             value += rhs.value;
             return *this;
         }
@@ -593,7 +595,7 @@ namespace rise {
             return lhs;
         }
 
-        Offset& operator-=(Offset rhs) {
+        Offset &operator-=(Offset rhs) {
             value -= rhs.value;
             return *this;
         }
@@ -603,7 +605,7 @@ namespace rise {
             return lhs;
         }
 
-        Offset& operator*=(Offset rhs) {
+        Offset &operator*=(Offset rhs) {
             value *= rhs.value;
             return *this;
         }
@@ -613,7 +615,7 @@ namespace rise {
             return lhs;
         }
 
-        Offset& operator/=(Offset rhs) {
+        Offset &operator/=(Offset rhs) {
             value /= rhs.value;
             return *this;
         }
@@ -623,7 +625,7 @@ namespace rise {
             return lhs;
         }
 
-        Offset& operator%=(Offset rhs) {
+        Offset &operator%=(Offset rhs) {
             value %= rhs.value;
             return *this;
         }
@@ -670,7 +672,7 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        Alignment& operator+=(Alignment rhs) {
+        Alignment &operator+=(Alignment rhs) {
             value += rhs.value;
             return *this;
         }
@@ -680,7 +682,7 @@ namespace rise {
             return lhs;
         }
 
-        Alignment& operator-=(Alignment rhs) {
+        Alignment &operator-=(Alignment rhs) {
             value -= rhs.value;
             return *this;
         }
@@ -690,7 +692,7 @@ namespace rise {
             return lhs;
         }
 
-        Alignment& operator*=(Alignment rhs) {
+        Alignment &operator*=(Alignment rhs) {
             value *= rhs.value;
             return *this;
         }
@@ -700,7 +702,7 @@ namespace rise {
             return lhs;
         }
 
-        Alignment& operator/=(Alignment rhs) {
+        Alignment &operator/=(Alignment rhs) {
             value /= rhs.value;
             return *this;
         }
@@ -710,7 +712,7 @@ namespace rise {
             return lhs;
         }
 
-        Alignment& operator%=(Alignment rhs) {
+        Alignment &operator%=(Alignment rhs) {
             value %= rhs.value;
             return *this;
         }
@@ -757,7 +759,7 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        Index& operator+=(Index rhs) {
+        Index &operator+=(Index rhs) {
             value += rhs.value;
             return *this;
         }
@@ -767,7 +769,7 @@ namespace rise {
             return lhs;
         }
 
-        Index& operator-=(Index rhs) {
+        Index &operator-=(Index rhs) {
             value -= rhs.value;
             return *this;
         }
@@ -777,7 +779,7 @@ namespace rise {
             return lhs;
         }
 
-        Index& operator*=(Index rhs) {
+        Index &operator*=(Index rhs) {
             value *= rhs.value;
             return *this;
         }
@@ -787,7 +789,7 @@ namespace rise {
             return lhs;
         }
 
-        Index& operator/=(Index rhs) {
+        Index &operator/=(Index rhs) {
             value /= rhs.value;
             return *this;
         }
@@ -797,7 +799,7 @@ namespace rise {
             return lhs;
         }
 
-        Index& operator%=(Index rhs) {
+        Index &operator%=(Index rhs) {
             value %= rhs.value;
             return *this;
         }
@@ -818,7 +820,11 @@ namespace rise {
     struct MemData {
         explicit MemData(void *data, const Size &size) : data(data), size(size) {}
 
-        void* data;
+        template<typename T>
+        explicit MemData(std::vector<T> const &vec) :
+                data(vec.data()), size(vec.size() * sizeof(T)) {}
+
+        void *data;
         Size size;
     };
 }
