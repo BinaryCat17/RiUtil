@@ -47,7 +47,7 @@ namespace rise {
         explicit Height(unsigned int value) : value(value) {}
 
         bool operator==(Height rhs) const {
-            return value == rhs.value;
+            return value == rhs.value;  
         }
 
         bool operator!=(Height rhs) const {
@@ -70,7 +70,8 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        friend std::ostream &operator<<(std::ostream &os, Height const &val) {
+        friend std::ostream &operator<<(std::ostream &os, Height const &val) {                      
+      
             os << val.value;
             return os;
         }
@@ -237,7 +238,7 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        friend std::ostream &operator<<(std::ostream &os, X const &val) {
+        friend std::ostream &operator<<(std::ostream &os, X const &val) {                          
             os << val.value;
             return os;
         }
@@ -311,7 +312,7 @@ namespace rise {
             return !(*this < rhs);
         }
 
-        friend std::ostream &operator<<(std::ostream &os, Z const &val) {
+        friend std::ostream &operator<<(std::ostream &os, Z const &val) {                                    
             os << val.value;
             return os;
         }
