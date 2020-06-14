@@ -4,15 +4,9 @@
 #include <optional>
 
 namespace rise {
-    template<typename EnumT>
-    std::string toString(EnumT val);
-
-    template<typename EnumT>
-    std::optional<EnumT> fromString(std::string const &str);
-
     template<typename EnumT, typename = std::enable_if_t<magic_enum::is_scoped_enum<EnumT>::value>>
     std::string toString(EnumT val) {
-        return magic_enum::enum_name(val);
+        return magic_enum::enum_name(val).data();
     }
 
     template<typename EnumT, typename = std::enable_if_t<magic_enum::is_scoped_enum<EnumT>::value>>
