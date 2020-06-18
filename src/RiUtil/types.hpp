@@ -278,6 +278,8 @@ namespace rise {
     };
 
     struct NonCopyable {
+        NonCopyable() = default;
+
         NonCopyable(NonCopyable const &) = delete;
 
         NonCopyable(NonCopyable &&) = default;
