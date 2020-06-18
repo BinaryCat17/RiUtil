@@ -3,6 +3,13 @@
 #include <string>
 #include <optional>
 
+#define RISE_MAKE_BIT_FLAGS(name, ...)                                        \
+  enum class name __VA_ARGS__; using name##Flags = ::rise::BitFlags<name>;    \
+  inline ::rise::BitFlags<name> operator|(name a, name b) noexcept            \
+  {                                                                           \
+    return ::rise::BitFlags<name>(a) | b;                                     \
+  }
+
 namespace rise {
     template<typename EnumT, typename = std::enable_if_t<magic_enum::is_scoped_enum<EnumT>::value>>
     std::string toString(EnumT val) {
@@ -175,10 +182,3 @@ namespace rise {
         return os;
     }
 }
-
-#define RISE_MAKE_BIT_FLAGS(name, ...)                                        \
-  enum class name __VA_ARGS__; using name##Flags = ::rise::BitFlags<name>;    \
-  inline ::rise::BitFlags<name> operator|(name a, name b) noexcept            \
-  {                                                                           \
-    return ::rise::BitFlags<name>(a) | b;                                     \
-  }
