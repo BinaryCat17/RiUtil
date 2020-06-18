@@ -205,8 +205,8 @@ namespace rise {
         Version() = default;
 
         explicit Version(unsigned int major, unsigned int minor = 0, unsigned int patch = 0,
-                         unsigned int tweak = 0) : major(major), minor(minor), patch(patch),
-                                                   tweak(tweak) {}
+                unsigned int tweak = 0) : major(major), minor(minor), patch(patch),
+                                          tweak(tweak) {}
 
         bool operator==(Version const &rhs) const {
             return major == rhs.major &&
@@ -275,5 +275,15 @@ namespace rise {
 
         void *data;
         Size size;
+    };
+
+    struct NonCopyable {
+        NonCopyable(NonCopyable const &) = delete;
+
+        NonCopyable(NonCopyable &&) = default;
+
+        NonCopyable& operator=(NonCopyable const &) = delete;
+
+        NonCopyable& operator=(NonCopyable &&) = default;
     };
 }
