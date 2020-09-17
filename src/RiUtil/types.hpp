@@ -17,7 +17,7 @@ namespace rise {
 
         bool operator==(Extent2D rhs) const {
             return width == rhs.width &&
-                   height == rhs.height;
+                height == rhs.height;
         }
 
         bool operator!=(Extent2D rhs) const {
@@ -57,12 +57,12 @@ namespace rise {
         Extent3D() = default;
 
         explicit Extent3D(Width width, Height height, Depth depth) : width(width), height(height),
-                                                                     depth(depth) {}
+            depth(depth) {}
 
         bool operator==(Extent3D rhs) const {
             return width == rhs.width &&
-                   height == rhs.height &&
-                   depth == rhs.depth;
+                height == rhs.height &&
+                depth == rhs.depth;
         }
 
         bool operator!=(Extent3D rhs) const {
@@ -116,7 +116,7 @@ namespace rise {
 
         bool operator==(Point2D rhs) const {
             return x == rhs.x &&
-                   y == rhs.y;
+                y == rhs.y;
         }
 
         bool operator!=(Point2D rhs) const {
@@ -159,8 +159,8 @@ namespace rise {
 
         bool operator==(Point3D rhs) const {
             return x == rhs.x &&
-                   y == rhs.y &&
-                   z == rhs.z;
+                y == rhs.y &&
+                z == rhs.z;
         }
 
         bool operator!=(Point3D rhs) const {
@@ -205,14 +205,14 @@ namespace rise {
         Version() = default;
 
         explicit Version(unsigned int major, unsigned int minor = 0, unsigned int patch = 0,
-                unsigned int tweak = 0) : major(major), minor(minor), patch(patch),
-                                          tweak(tweak) {}
+            unsigned int tweak = 0) : major(major), minor(minor), patch(patch),
+            tweak(tweak) {}
 
         bool operator==(Version const &rhs) const {
             return major == rhs.major &&
-                   minor == rhs.minor &&
-                   patch == rhs.patch &&
-                   tweak == rhs.tweak;
+                minor == rhs.minor &&
+                patch == rhs.patch &&
+                tweak == rhs.tweak;
         }
 
         bool operator!=(Version const &rhs) const {
@@ -249,7 +249,7 @@ namespace rise {
 
         friend std::ostream &operator<<(std::ostream &os, Version const &version) {
             os << version.major << "." << version.minor << "."
-               << version.patch << "." << version.tweak;
+                << version.patch << "." << version.tweak;
             return os;
         }
 
@@ -268,12 +268,13 @@ namespace rise {
     using Index = size_t;
 
     struct MemData {
-        explicit MemData(void *data, const Size &size) : data(data), size(size) {}
+        explicit MemData(void const *data, const Size &size) : data(data), size(size) {}
 
         template<typename T>
-        explicit MemData(std::vector<T> &vec) : data(vec.data()), size(vec.size() * sizeof(T)) {}
+        explicit
+        MemData(std::vector<T> const &vec) : data(vec.data()), size(vec.size() * sizeof(T)) {}
 
-        void *data;
+        void const *data;
         Size size;
     };
 
@@ -284,12 +285,15 @@ namespace rise {
 
         NonCopyable(NonCopyable &&) = default;
 
-        NonCopyable& operator=(NonCopyable const &) = delete;
+        NonCopyable &operator=(NonCopyable const &) = delete;
 
-        NonCopyable& operator=(NonCopyable &&) = default;
+        NonCopyable &operator=(NonCopyable &&) = default;
     };
 
-    template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+    template<class... Ts>
+    struct overloaded : Ts ... {
+        using Ts::operator()...;
+    };
 
     template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 }
